@@ -26,4 +26,6 @@ for(let i= 0; i < (tasks2.length + 2); i++){
   }
 // }
 }
+
+tasks[tasks3.length -1] = "New task";
 console.log("Updated Array: "+tasks3);
