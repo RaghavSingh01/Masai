@@ -12,7 +12,7 @@ let tasks3 = [];
 
 for(let i= 0; i < (tasks2.length + 2); i++){
    
-    for(let j = 0; j < tasks2.length; j++){
+    // for(let j = 0; j < tasks2.length; j++){
   if(i == 0){
     tasks3[i] = "Priority task 1";
     
@@ -22,8 +22,8 @@ for(let i= 0; i < (tasks2.length + 2); i++){
     
   }
   else{
-    tasks3[i] = tasks2[j];
+    tasks3[i] = tasks2[i - 2];
   }
+// }
 }
-}
-console.log(tasks3);
+console.log("Updated Array: "+tasks3);
