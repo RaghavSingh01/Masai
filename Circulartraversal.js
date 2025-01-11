@@ -20,7 +20,7 @@ for(let i = 1; i < n; i++ ){
 }
 console.log(result);
 
-for(let j = m - 1; j > n ; j--){
+for(let j = m - 2; j > n ; j--){
     result += arr[n-1][j] + " ";
 }
 
