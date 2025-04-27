@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <form action="/submit">
+  <label Name="username">Enter Username:</label>
+  <input type="text" id="username" name="username">
+
+  <label for="password">Password:</label>
+  <input typ="password" id="passcode" name="password">
+
+  <button for="Submit">Submit Form</button>
+</form>
+
+
+      <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+This is the debugged version of the code where the button tag was properly closed, double quotes were added to username in the first input tag and also the label was updated.
