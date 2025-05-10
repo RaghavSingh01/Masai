@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+
+<h2>Register</h2>
+
+<form id="registerForm">
+    <input type="text" id="name" placeholder="Name" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button type="submit">Register</button>
+</form>
+
+<div id="message" class="message"></div>
+
+<script>
+    const form = document.getElementById('registerForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Basic validation
+        if (!name || !email || !password) {
+            messageDiv.textContent = 'All fields are required.';
+            messageDiv.className = 'message error';
+            return;
+        }
+
+        // Create user object
+        const userData = {
+            name,
+            email,
+            password
+        };
+
+        
+            // Send POST request
+            const response = await fetch('https://mockapi.io/usershttps://mockapi.io/projects/681f837972e59f922ef67978', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const result = await response.json();
+
+                messageDiv.textContent = 'Registration successful!';
+                messageDiv.className = 'message success';
+                form.reset();
+            
+    });
+</script>
+
+</body>
+</html>
