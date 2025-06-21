@@ -62,7 +62,7 @@ function App() {
               const countries = JSON.parse(localStorage.getItem('countries')) || [];
               
               const result = countries.find(query => query.name.toLowerCase() === country);
-              console.log(country);
+              
               if (result) {
                 const resultDiv = document.getElementById('resultDiv');
                 resultDiv.innerHTML = JSON.parse(localStorage.getItem('countries')) ;

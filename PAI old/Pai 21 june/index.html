@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Scheduler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+   form{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+    
+   }
+   input, button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16px;
+   }
+   button{
+    border-radius: 6px;
+    background-color: rgb(224, 221, 221);
+   }
+   button:hover{
+    background-color: rgb(73, 73, 220);
+    color: white;
+    border-radius: 10px;
+   }
+  </style>
+</head>
+<body>
+  <form id="taskForm">
+    <input type="text" id="taskName" placeholder="Task Name" required />
+    <input type="number" id="delay" placeholder="Delay in ms" required />
+    <label>
+      <input type="checkbox" id="repeat" />
+      Repeat?
+    </label>
+    <button type="submit">Start Task</button>
+  </form>
+
+  <ul id="taskLog"></ul>
+ 
+
+  <script>
+    const form = document.getElementById('taskForm');
+    const taskLog = document.getElementById('taskLog');
+    
+
+    const intervals = []; 
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toTimeString().split(' ')[0]; 
+    }
+
+    function logTask(name) {
+      const li = document.createElement('li');
+      li.textContent = ` Task "${name}" executed at ${getCurrentTime()}`;
+      taskLog.appendChild(li);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('taskName').value;
+      const delay = parseInt(document.getElementById('delay').value, 10);
+      const repeat = document.getElementById('repeat').checked;
+
+      if (repeat) {
+        const intervalId = setInterval(() => logTask(name), delay);
+        intervals.push(intervalId);
+        console.log(intervals)
+      } else {
+        setTimeout(() => logTask(name), delay);
+      }
+
+      form.reset();
+    });
+
+    
+  </script>
+</body>
+</html>
