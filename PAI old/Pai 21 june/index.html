@@ -29,6 +29,19 @@
     color: white;
     border-radius: 10px;
    }
+
+   #cancelAll {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background-color: rgb(224, 221, 221);
+    
+   }
+   #cancelAll:hover {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+   }
   </style>
 </head>
 <body>
@@ -41,24 +54,25 @@
     </label>
     <button type="submit">Start Task</button>
   </form>
-
+  
+  <button id="cancelAll">Cancel all Tasks </button>
   <ul id="taskLog"></ul>
- 
-
+  
   <script>
-    const form = document.getElementById('taskForm');
-    const taskLog = document.getElementById('taskLog');
+    let form = document.getElementById('taskForm');
+    let taskLog = document.getElementById('taskLog');
+    let cancelBtn = document.getElementById('cancelAll');
     
 
-    const intervals = []; 
+    let intervals = []; 
 
     function getCurrentTime() {
-      const now = new Date();
+      let now = new Date();
       return now.toTimeString().split(' ')[0]; 
     }
 
     function logTask(name) {
-      const li = document.createElement('li');
+      let li = document.createElement('li');
       li.textContent = ` Task "${name}" executed at ${getCurrentTime()}`;
       taskLog.appendChild(li);
     }
@@ -66,12 +80,12 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const name = document.getElementById('taskName').value;
-      const delay = parseInt(document.getElementById('delay').value, 10);
-      const repeat = document.getElementById('repeat').checked;
+      let name = document.getElementById('taskName').value;
+      let delay = parseInt(document.getElementById('delay').value, 10);
+      let repeat = document.getElementById('repeat').checked;
 
       if (repeat) {
-        const intervalId = setInterval(() => logTask(name), delay);
+        let intervalId = setInterval(() => logTask(name), delay);
         intervals.push(intervalId);
         console.log(intervals)
       } else {
@@ -81,7 +95,11 @@
       form.reset();
     });
 
-    
+    cancelBtn.addEventListener('click', function () {
+      intervals.forEach(clearInterval);
+      intervals.length = 0;
+      
+    });
   </script>
 </body>
 </html>
