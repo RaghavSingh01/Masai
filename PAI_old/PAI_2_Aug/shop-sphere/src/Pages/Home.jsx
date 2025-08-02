@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import '../App.css'
 import Card from "../Card";
+import { useDispatch, useSelector} from 'react-redux'
+import { addToCart } from "../Redux/CartSlice";
 
 
 const Home = () => {
@@ -9,7 +11,9 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
-  
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
   const getPosts = () => {
     setLoading(true);
     axios
@@ -43,11 +47,11 @@ const Home = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [loading]);
 
-  const addToCart = (product) =>{
-    const existingCart = JSON.parse()
-    console.log("Added to cart")
+ const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    console.log("Current Cart : ", cartItems);
+};
 
-  }
   return (
     <>
     <div className="bg-gray-100">
@@ -66,7 +70,7 @@ const Home = () => {
             <img src={el.image} alt={el.title} className="size-40 self-center"/>
             <h2 className="font-serif text-center text-xl">{el.title}</h2>
             <h4 className="text-center">${el.price}</h4>
-            <button className="border-1 rounded-xs p-2 bg-amber-200 hover:bg-blue-400 duration-300 ease-out " onClick={() => addToCart(el)}>Add to Cart</button>
+            <button className="border-1 rounded-xs p-2 bg-amber-200 hover:bg-blue-400 duration-300 ease-out " onClick={() => handleAddToCart(el)}>Add to Cart</button>
 
         </div>
       ))}
