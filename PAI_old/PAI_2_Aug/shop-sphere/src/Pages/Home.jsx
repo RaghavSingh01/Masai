@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import '../App.css'
 import Card from "../Card";
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux';
 import { addToCart } from "../Redux/CartSlice";
 
 
@@ -10,7 +10,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
