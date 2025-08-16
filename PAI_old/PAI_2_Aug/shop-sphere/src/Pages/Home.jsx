@@ -75,7 +75,7 @@ const Home = () => {
         </div>
       ))}
       </div>
-      {loading && <p>Loading...</p>}
+      {loading && <h3>Loading...</h3>}
       </div>
     </>
   );
