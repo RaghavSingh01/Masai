@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "GitHub OAuth JWT API",
+    "description": "Collection for testing GitHub OAuth with JWT and MongoDB API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "    const response = pm.response.json();",
+              "    pm.collectionVariables.set('token', response.token);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Get Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/profile",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile"]
+        }
+      }
+    },
+    {
+      "name": "Update Profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"updateduser\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/profile",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile"]
+        }
+      }
+    },
+    {
+      "name": "GitHub OAuth",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/auth/github",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "github"]
+        }
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/logout",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "logout"]
+        }
+      }
+    }
+  ]
+}
