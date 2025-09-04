@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "description": "High-performance laptop for development",
+    "price": 999.99,
+    "category": "electronics",
+    "createdAt": "2025-09-04T16:15:00.000Z",
+    "updatedAt": "2025-09-04T16:15:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Coffee Mug",
+    "description": "Ceramic mug for your morning coffee",
+    "price": 15.99,
+    "category": "kitchen",
+    "createdAt": "2025-09-04T16:15:00.000Z",
+    "updatedAt": "2025-09-04T16:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Notebook",
+    "description": "Spiral notebook for taking notes",
+    "price": 5.99,
+    "category": "office",
+    "createdAt": "2025-09-04T16:15:00.000Z",
+    "updatedAt": "2025-09-04T16:15:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse",
+    "price": 29.99,
+    "category": "electronics",
+    "createdAt": "2025-09-04T16:15:00.000Z",
+    "updatedAt": "2025-09-04T16:15:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Desk Lamp",
+    "description": "Adjustable LED desk lamp",
+    "price": 45,
+    "category": "furniture",
+    "createdAt": "2025-09-04T16:15:00.000Z",
+    "updatedAt": "2025-09-04T16:15:00.000Z"
+  }
+]
