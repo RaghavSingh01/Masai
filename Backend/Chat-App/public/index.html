@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Group Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection" class="login-section">
+            <div class="login-card">
+                <h2><i class="fas fa-comments"></i> Real-time Group Chat</h2>
+                <div class="login-form">
+                    <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20" required>
+                    <select id="roomSelect">
+                        <option value="general">General</option>
+                        <option value="room1">Room 1</option>
+                        <option value="room2">Room 2</option>
+                        <option value="tech">Tech Talk</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <button id="joinBtn"><i class="fas fa-sign-in-alt"></i> Join Chat</button>
+                </div>
+                <div class="admin-info">
+                    <small><i class="fas fa-info-circle"></i> Use 'admin' or 'admin_name' for admin rights</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chatSection" class="chat-section" style="display: none;">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="room-info">
+                    <h3><i class="fas fa-hashtag"></i> <span id="currentRoom">general</span></h3>
+                    <div class="user-info">
+                        Welcome, <strong id="currentUser"></strong>
+                        <span id="adminBadge" style="display: none;"><i class="fas fa-crown" title="Admin"></i></span>
+                    </div>
+                </div>
+                <div class="chat-controls">
+                    <select id="roomSwitcher">
+                        <option value="general">General</option>
+                        <option value="room1">Room 1</option>
+                        <option value="room2">Room 2</option>
+                        <option value="tech">Tech Talk</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <button id="disconnectBtn" class="disconnect-btn"><i class="fas fa-sign-out-alt"></i>
+                        Disconnect</button>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <!-- Online Users Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h4><i class="fas fa-users"></i> Online Users (<span id="userCount">0</span>)</h4>
+                    </div>
+                    <div id="onlineUsers" class="online-users"></div>
+                </div>
+
+                <!-- Chat Area -->
+                <div class="chat-area">
+                    <div id="messages" class="messages"></div>
+
+                    <!-- Message Input -->
+                    <div class="message-input">
+                        <div class="input-group">
+                            <input type="text" id="messageInput" placeholder="Type your message..." maxlength="500"
+                                disabled>
+                            <button id="sendBtn" disabled><i class="fas fa-paper-plane"></i></button>
+                        </div>
+
+                        <!-- Admin Broadcast (shown only for admins) -->
+                        <div id="adminControls" class="admin-controls" style="display: none;">
+                            <div class="input-group admin-input">
+                                <input type="text" id="broadcastInput" placeholder="Admin broadcast message..."
+                                    maxlength="500">
+                                <button id="broadcastBtn"><i class="fas fa-bullhorn"></i> Broadcast</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Area -->
+    <div id="notifications" class="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
