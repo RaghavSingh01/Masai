@@ -1,0 +1,34 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name of: Install dependencies
+        run: npm install
+
+ 
+      - name: Run integration tests
+        run: npm test
+        env:
+          MONGODB_TEST_URI: mongodb://localhost:27017/todo-app-test
+          JWT_SECRET: a8b1c5d9e2f6a7b3c8d4e0f1a2b6c7d8e3f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3
