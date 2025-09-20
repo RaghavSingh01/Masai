@@ -134,7 +134,7 @@ router.post('/login', login);
  *       404:
  *         description: User not found
  */
-router.post('/forgot-password', forgotPassword);
+router.post('/password/forgot', forgotPassword);
 
 /**
  * @swagger
@@ -168,7 +168,7 @@ router.post('/forgot-password', forgotPassword);
  *       400:
  *         description: Invalid or expired token
  */
-router.put('/reset-password/:resettoken', resetPassword);
+router.put('/password/reset/:resettoken', resetPassword);
 
 /**
  * @swagger
@@ -196,6 +196,11 @@ router.put('/reset-password/:resettoken', resetPassword);
  *       401:
  *         description: Unauthorized
  */
+
+router.post('/logout', (req,res)=>{
+  res.json({success: true, message: 'Logged out successfully'});
+});
+
 router.get('/profile', protect, getProfile);
 
 module.exports = router;
