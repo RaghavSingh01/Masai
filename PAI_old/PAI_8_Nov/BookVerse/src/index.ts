@@ -1,0 +1,43 @@
+import { PhysicalBook, EBook, FestiveDiscount, DigitalDiscount } from './DiscountDecorator.js';
+import Order from './Order.js';
+import StoreManager from './StoreManager.js';
+import { FedExShipping, BlueDartShipping } from './ShippingStrategy.js';
+import { CustomerNotifier, DeliveryNotifier } from './Observer.js';
+
+const storeManager = StoreManager.getInstance();
+
+const book1 = new PhysicalBook('The Great Gatsby', 'F. Scott Fitzgerald', 500, 'Fiction');
+const book2 = new EBook('1984', 'George Orwell', 300, 'Fiction');
+
+const discountedBook1 = new FestiveDiscount(book1);
+const discountedBook2 = new DigitalDiscount(book2);
+
+console.log(`${discountedBook1.getDescription()}: â‚¹${discountedBook1.getPrice()}`);
+console.log(`${discountedBook2.getDescription()}: â‚¹${discountedBook2.getPrice()}`);
+
+const order1 = new Order([book1, book2]);
+
+const customerNotifier = new CustomerNotifier();
+const deliveryNotifier = new DeliveryNotifier();
+
+order1.addObserver(customerNotifier);
+order1.addObserver(deliveryNotifier);
+
+storeManager.addOrder(order1);
+
+console.log(`\nOrder Status: ${order1.getStatus()}`);
+
+order1.next();
+console.log(`Order Status: ${order1.getStatus()}`);
+
+order1.setShippingStrategy(new FedExShipping());
+order1.next();
+console.log(`Order Status: ${order1.getStatus()}`);
+order1.ship();
+
+order1.next();
+console.log(`Order Status: ${order1.getStatus()}`);
+
+console.log(`\nActive Orders: ${storeManager.getActiveOrders().length}`);
+console.log(`Delivered Orders: ${storeManager.getDeliveredOrders().length}`);
+console.log(`Total Orders: ${storeManager.getAllOrders().length}`);
