@@ -12,8 +12,8 @@ const book2 = new EBook('1984', 'George Orwell', 300, 'Fiction');
 const discountedBook1 = new FestiveDiscount(book1);
 const discountedBook2 = new DigitalDiscount(book2);
 
-console.log(`${discountedBook1.getDescription()}: â‚¹${discountedBook1.getPrice()}`);
-console.log(`${discountedBook2.getDescription()}: â‚¹${discountedBook2.getPrice()}`);
+console.log(`${discountedBook1.getDescription()}:${discountedBook1.getPrice()}`);
+console.log(`${discountedBook2.getDescription()}: ${discountedBook2.getPrice()}`);
 
 const order1 = new Order([book1, book2]);
 
